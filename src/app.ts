@@ -8,6 +8,7 @@ import * as expressValidator from 'express-validator';
 import * as swaggerUI from 'swagger-ui-express';
 
 import * as swaggerDocument from '../swagger.json';
+import { SearchRouter } from './routes';
 
 dotenv.config({path: '.env' || '.env.example'});
 
@@ -25,6 +26,8 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+app.use('/search', SearchRouter);
 
 app.use('/ping', (req, res) => res.json({ success: true, message: 'Hello' }));
 
